@@ -9,15 +9,29 @@
 #
 
 from lib.Console import Console
-
+from lib.ANSIEscape import ANSIEscape
 
 
 
 print("h")
 c = Console(50, 5)
 
-c.clearScreen()
-c.print("Done", "Black", "Red")
+print(c.clearScreen())
+c.frame()
+c.printAt("TopLeft", 21, 1, "Blue", "Black")
+c.printAt("BottomRight", 38, 4, "Black", "Green")
 
-print("\n\n")
+for n in range(5):
+    c.printAt("Done " + str(n), 5, 4, "Red", "Black")
+    c.show()
+    c.clear()
 
+
+#https://en.wikipedia.org/wiki/ANSI_escape_code
+for r in range(0, 5):
+    
+    print(ANSIEscape.getResetCode())
+    for g in range(0, 5):
+        for b in range(0, 5):
+            print(ANSIEscape.getColorBackgroundColorRGB(r,g,b) + "Hej", end='')
+print(ANSIEscape.getResetCode() + " ")

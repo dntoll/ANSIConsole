@@ -7,55 +7,44 @@
 # see the Pycom Licence v1.0 document supplied with this file, or
 # available at https://www.pycom.io/opensource/licensing
 #
-
+from ANSIEscape import ANSIEscape
 
 class Console:
     #https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#8-colors
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.color = {
-            "Black": "\u001b[30m",
-            "Red": "\u001b[31m",
-            "Green": "\u001b[32m",
-            "Yellow": "\u001b[33m",
-            "Blue": "\u001b[34m",
-            "Magenta": "\u001b[35m",
-            "Cyan": "\u001b[36m",
-            "White": "\u001b[37m",
-            "Reset": "\u001b[0m" 
-        }
-        self.background = {
-            "Black": "\u001b[40m",
-            "Red": "\u001b[41m",
-            "Green": "\u001b[42m",
-            "Yellow": "\u001b[43m",
-            "Blue": "\u001b[44m",
-            "Magenta": "\u001b[45m",
-            "Cyan": "\u001b[46m",
-            "White": "\u001b[47m",
-            "Reset": "\u001b[0m" 
-        }
-
-        "\u001b[1000D"
-
-        return
+        self.clear()
     
-    def.show(self):
-        script =""
-        script += self.clearScreen()
-        script += self.goToX0Y0()
+    def show(self):
+        script = ""
+       # script += self.clearScreen()
+        script += ANSIEscape.goToXY(0,0)
+        script += self.buffer
         
-        return
-        
-    def print(self, text, color="White", background="Black"):
-        print(self.background[background] + self.color[color] + text + self.color["Reset"], end='')
-    
-    def goToX0Y0(self):
-        return "\u001b[0;0H"
+        print(script+"\n")
 
+    def frame(self, char='*'):
+        self.buffer += ANSIEscape.goToXY(0,0)
+        self.printAt( '/' + (self.width-2) *  '-' + '\\', 0,0, "Blue", "Black")
+        for n in range(2,self.height):
+            self.printAt('|', 0, n, "Blue", "Black")
+            self.printAt('|', self.width, n, "Blue", "Black")
+        self.printAt('\\' + (self.width-2)*'-' + '/', 0, self.height, "Blue", "Black")
+        ##for y in range(0, self.height):
+        #    self.buffer
+    
     def clearScreen(self):
-        return "\u001b[2J"
+        print(ANSIEscape.clearScreen())
+
+    def clear(self):
+        self.buffer = "";
+
+    def printAt(self, text, x, y, color="White", background="Black"):
+        self.buffer += ANSIEscape.goToXY(x, y)
+        self.buffer += ANSIEscape.getBackgroundColor(background) + ANSIEscape.getTextColor(color) + text + ANSIEscape.getResetCode()
+    
+    
 
 
     
