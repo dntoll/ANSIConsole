@@ -21,6 +21,7 @@ class ANSIEscape:
     def getBrightBackgroundColor(colorString):
         return "\u001b[4"+ ANSIEscape.COLORS[colorString] + ";1m"
 
+    #RGB between 0-5
     def getColorBackgroundColorRGB(r, g, b):
         index = 16 + 36 * r + 6 * g + b
         return "\u001b[48;5;" + str(index) + "m"

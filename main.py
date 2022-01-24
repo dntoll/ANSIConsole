@@ -10,19 +10,22 @@
 
 from lib.Console import Console
 from lib.ANSIEscape import ANSIEscape
-
+import math
+import utime
 
 
 print("h")
-c = Console(50, 5)
+c = Console(50, 6)
 
 print(c.clearScreen())
 c.frame()
 c.printAt("TopLeft", 21, 1, "Blue", "Black")
 c.printAt("BottomRight", 38, 4, "Black", "Green")
+value = c.createValue("Sine", "mm", 2, 3, 2, "Red", "Black")
 
-for n in range(5):
-    c.printAt("Done " + str(n), 5, 4, "Red", "Black")
+for n in range(100):
+    sensorValue = math.sin(utime.ticks_us())
+    value.set(sensorValue)
     c.show()
     c.clear()
 
