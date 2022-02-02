@@ -24,17 +24,17 @@ c.printAt("BottomRight", 38, 4, "Black", "Green")
 value = c.createValue("Sine", "mm", 2, 3, 2, "Red", "Black")
 
 for n in range(100):
-    sensorValue = math.sin(utime.ticks_us())
+    sensorValue = math.sin(n*(3.14*2.0)/20)
     value.set(sensorValue)
     c.show()
     c.clear()
 
 
 #https://en.wikipedia.org/wiki/ANSI_escape_code
-for r in range(0, 5):
+"""for r in range(0, 5):
     
     print(ANSIEscape.getResetCode())
     for g in range(0, 5):
         for b in range(0, 5):
             print(ANSIEscape.getColorBackgroundColorRGB(r,g,b) + "Hej", end='')
-print(ANSIEscape.getResetCode() + " ")
+print(ANSIEscape.getResetCode() + " ")"""
