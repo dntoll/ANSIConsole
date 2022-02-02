@@ -14,20 +14,30 @@ import math
 import utime
 
 
+#Print something that is not going to be shown
 print("h")
-c = Console(50, 6)
 
-print(c.clearScreen())
+#Create a console 
+c = Console(width= 15, height= 6)
+
+#remove all printed
+print(c.clearScreen()) 
+
+#Print a frame once /----\
 c.frame()
-c.printAt("TopLeft", 21, 1, "Blue", "Black")
-c.printAt("BottomRight", 38, 4, "Black", "Green")
-value = c.createValue("Sine", "mm", 2, 3, 2, "Red", "Black")
+
+#Print a title once
+c.printAt("Sine", x=6, y=1, color="Blue", background="Black")
+
+#Create a value
+value = c.createValue("Sin", "m", decimals=1, x=2, y=2, color="Green", background="Black")
 
 for n in range(100):
-    sensorValue = math.sin(n*(3.14*2.0)/20)
+    sensorValue = math.sin(n*(3.14*2.0)/5)
     value.set(sensorValue)
     c.show()
-    c.clear()
+    print("other that is printed")
+    print("during the program runs")
 
 
 #https://en.wikipedia.org/wiki/ANSI_escape_code

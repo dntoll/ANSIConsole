@@ -36,6 +36,7 @@ class Console:
         
         
         print(script+"\n")
+        self.clear()
 
     def frame(self, char='*'):
         self.buffer += ANSIEscape.goToXY(0,0)
