@@ -30,14 +30,17 @@ c.frame()
 c.printAt("Sine", x=6, y=1, color="Blue", background="Black")
 
 #Create a value
-value = c.createValue("Sin", "m", decimals=1, x=2, y=2, color="Green", background="Black")
+value = c.createValue("Sin", "m", decimals=2, x=2, y=2, color="Green", background="Black", detail=0)
+#value2 = c.createValue("Cos", "m", decimals=2, x=2, y=2, color="Green", background="Black")
 
 for n in range(100):
     sensorValue = math.sin(n*(3.14*2.0)/5)
     value.set(sensorValue)
+    #value2.set(1.0-sensorValue)
     c.show()
-    print("other that is printed")
+    print("other that is printed " + str(n))
     print("during the program runs")
+    
 
 
 #https://en.wikipedia.org/wiki/ANSI_escape_code

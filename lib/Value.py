@@ -3,14 +3,7 @@
 
 class Value:
 
-    def __init__(self, title, unit, decimals, x, y, color, background):
-        self.title = title
-        self.unit = unit
-        self.x = x 
-        self.y = y
-        self.decimals = decimals #number of decimals
-        self.color = color #forground color
-        self.background = background #background color
+    def __init__(self):
         self.value = 0
         self.total = 0
         self.min = None

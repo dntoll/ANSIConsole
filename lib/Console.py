@@ -22,34 +22,29 @@ class Console:
         self.values = []
     
     def show(self):
-
         for val in self.values:
-            vv = ValueView(val)
-            self.buffer += vv.get(self.height)
-            
-
+            self.buffer += val.get(self.height)
         script = ""
-       # script += self.clearScreen()
         script += ANSIEscape.goToXY(0,0)
         script += self.buffer
-
-        
-        
-        print(script+"\n")
+        print(script + ANSIEscape.goToXY(0, self.height) )
         self.clear()
 
     def frame(self, char='*'):
         self.buffer += ANSIEscape.goToXY(0,0)
         self.printAt( '/' + (self.width-2) *  '-' + '\\', 0,0, "Blue", "Black")
-        for n in range(2,self.height):
+        for n in range(2, self.height):
             self.printAt('|', 0, n, "Blue", "Black")
             self.printAt('|', self.width, n, "Blue", "Black")
         self.printAt('\\' + (self.width-2)*'-' + '/', 0, self.height, "Blue", "Black")
         ##for y in range(0, self.height):
         #    self.buffer
-    def createValue(self, title, unit, decimals, x, y, color, background):
-        val = Value(title, unit, decimals, x, y, color, background)
-        self.values.append(val)
+    def createValue(self, title, unit, decimals, x, y, color, background, detail):
+
+        val = Value()
+        valueView = ValueView(val, title, unit, decimals, x, y, color, background, detail)
+        
+        self.values.append(valueView)
         return val
     
     def clearScreen(self):
