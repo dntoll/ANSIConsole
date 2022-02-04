@@ -15,8 +15,7 @@ from ValueView import ValueView
 
 class Console:
     #https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#8-colors
-    def __init__(self, width, height):
-        self.width = width
+    def __init__(self, height):
         self.height = height
         self.clear()
         self.values = []
@@ -30,13 +29,13 @@ class Console:
         print(script + ANSIEscape.goToXY(0, self.height) )
         self.clear()
 
-    def frame(self, char='*'):
-        self.buffer += ANSIEscape.goToXY(0,0)
-        self.printAt( '/' + (self.width-2) *  '-' + '\\', 0,0, "Blue", "Black")
-        for n in range(2, self.height):
-            self.printAt('|', 0, n, "Blue", "Black")
-            self.printAt('|', self.width, n, "Blue", "Black")
-        self.printAt('\\' + (self.width-2)*'-' + '/', 0, self.height, "Blue", "Black")
+    def frame(self, x, y, width, height):
+        self.buffer += ANSIEscape.goToXY(x,y)
+        self.printAt( '/' + (width-2) *  '-' + '\\', x,y, "Blue", "Black")
+        for n in range(2, height):
+            self.printAt('|', x, n, "Blue", "Black")
+            self.printAt('|', x+width, n, "Blue", "Black")
+        self.printAt('\\' + (width-2)*'-' + '/', x, height, "Blue", "Black")
         ##for y in range(0, self.height):
         #    self.buffer
     def createValue(self, title, unit, decimals, x, y, color, background, detail):

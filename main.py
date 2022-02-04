@@ -18,28 +18,32 @@ import utime
 print("h")
 
 #Create a console 
-c = Console(width= 15, height= 6)
+c = Console(height= 6)
 
 #remove all printed
 print(c.clearScreen()) 
 
 #Print a frame once /----\
-c.frame()
+c.frame(0,0, 15, 3)
+c.frame(16,0, 15, 6)
 
 #Print a title once
-c.printAt("Sine", x=6, y=1, color="Blue", background="Black")
+c.printAt("Sin", x=6, y=1, color="Blue", background="Black")
+c.printAt("Cos", x=16+6, y=1, color="Red", background="Black")
+
 
 #Create a value
-value = c.createValue("Sin", "m", decimals=2, x=2, y=2, color="Green", background="Black", detail=0)
-#value2 = c.createValue("Cos", "m", decimals=2, x=2, y=2, color="Green", background="Black")
+value = c.createValue("Sin", "m", decimals=2, x=2, y=2, color="Green", background="Black", detail=1)
+value2 = c.createValue("Cos", "m", decimals=2, x=17, y=2, color="Red", background="Black", detail=3)
+
 
 for n in range(100):
     sensorValue = math.sin(n*(3.14*2.0)/5)
     value.set(sensorValue)
-    #value2.set(1.0-sensorValue)
+    value2.set(1.0-sensorValue)
     c.show()
-    print("other that is printed " + str(n))
-    print("during the program runs")
+    #print("other that is printed " + str(n))
+    #print("during the program runs")
     
 
 

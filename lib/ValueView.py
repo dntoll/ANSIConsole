@@ -27,15 +27,15 @@ class ValueView:
 
         if self.detail == 0:
             ret += self.getText(val.value)
-        if self.detail > 1:
+        if self.detail >= 1:
             ret += self.title + ": " + self.getText(val.value) + ANSIEscape.goToXY(self.x, self.y+1)
-        if self.detail > 2:
+        if self.detail >= 2:
             ret += self.title + ": " + self.getText(val.value) + ANSIEscape.goToXY(self.x, self.y+1)
             ret += "max :" + self.getText(val.max) + ANSIEscape.goToXY(self.x, self.y+2)
             ret += "avg :" + self.getText(val.getAverage()) + ANSIEscape.goToXY(self.x, self.y+3)
             ret += "min :" + self.getText(val.min) + ANSIEscape.goToXY(self.x, self.y+4)
 
-        if self.detail > 3:
+        if self.detail >= 3:
             ran = val.max - val.min
             if ran > 0:
                 fraktion = (val.value - val.min) / ran
