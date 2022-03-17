@@ -1,5 +1,5 @@
 
-from ANSIEscape import ANSIEscape
+from ansiconsole.ANSIEscape import ANSIEscape
 import math
 
 class ValueView:
@@ -30,7 +30,6 @@ class ValueView:
         if self.detail >= 1:
             ret += self.title + ": " + self.getText(val.value) + ANSIEscape.goToXY(self.x, self.y+1)
         if self.detail >= 2:
-            ret += self.title + ": " + self.getText(val.value) + ANSIEscape.goToXY(self.x, self.y+1)
             ret += "max :" + self.getText(val.max) + ANSIEscape.goToXY(self.x, self.y+2)
             ret += "avg :" + self.getText(val.getAverage()) + ANSIEscape.goToXY(self.x, self.y+3)
             ret += "min :" + self.getText(val.min) + ANSIEscape.goToXY(self.x, self.y+4)
@@ -47,25 +46,3 @@ class ValueView:
 
         return ret + ANSIEscape.getResetCode()
 
-""" The framerate was too low for this
-    def bufferGraph(self, height):
-        ret = ""
-        left = self.value.x + 20
-        top = self.value.y 
-
-
-        for i in range(0, self.value.buffer.getSize()-1):
-            val = self.value.buffer.get(i)
-            x = left + i
-            vrange = self.value.max - self.value.min
-            yscale = height/vrange
-            ypos = yscale*(val-self.value.min)
-            iypos = math.floor(ypos)
-
-            #self.buffer +=  + text +  _,-^-._
-            for y in range(height):
-                ret += ANSIEscape.goToXY(x, y) + " "
-            ret += ANSIEscape.goToXY(x, iypos) + "x" + ANSIEscape.getResetCode()
-
-
-        return ret"""

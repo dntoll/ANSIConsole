@@ -7,9 +7,9 @@
 # see the Pycom Licence v1.0 document supplied with this file, or
 # available at https://www.pycom.io/opensource/licensing
 #
-from ANSIEscape import ANSIEscape
-from Value import Value
-from ValueView import ValueView
+from ansiconsole.ANSIEscape import ANSIEscape
+from ansiconsole.Value import Value
+from ansiconsole.ValueView import ValueView
 
 
 
@@ -23,18 +23,19 @@ class Console:
     def show(self):
         for val in self.values:
             self.buffer += val.get(self.height)
-        script = ""
-        script += ANSIEscape.goToXY(0,0)
+        script = ANSIEscape.saveState()
         script += self.buffer
-        print(script + ANSIEscape.goToXY(0, self.height) )
+        print(script + ANSIEscape.loadState(), end='')
         self.clear()
 
     def frame(self, x, y, width, height):
+        self.buffer += ANSIEscape.goToXY(x+width,y+height)
+        #self.buffer +=  ANSIEscape.clearFromCursorToBeginning()
+
         self.buffer += ANSIEscape.goToXY(x,y)
         self.printAt( '/' + (width-2) *  '-' + '\\', x,y, "Blue", "Black")
         for n in range(2, height):
-            self.printAt('|', x, n, "Blue", "Black")
-            self.printAt('|', x+width, n, "Blue", "Black")
+            self.printAt( '|' + (width-2) *  ' ' + '|', x,y+n, "Blue", "Black")
         self.printAt('\\' + (width-2)*'-' + '/', x, height, "Blue", "Black")
         ##for y in range(0, self.height):
         #    self.buffer
